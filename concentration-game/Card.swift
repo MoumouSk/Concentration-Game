@@ -8,26 +8,31 @@
 
 import Foundation
 
-struct Card
+// This struct represents one Card and all the info that it needs. Will be used by the Game instance
+// and nearly everywhere throughout the code.
+
+struct Card: Hashable
 {
-    var id: Int
+    var hashValue: Int { return id }
+    
+    static func ==(lhs: Card, rhs: Card) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    private var id: Int
     var isFaced = false
     var isMatched = false
     var alreadySeen = false
 
-    static var idFactory = 0
-    static var flipCount = 0
     
+    // Those set & return an unique id for each card
+    static var idFactory = 0
     static func getUniqueId() -> Int {
         Card.idFactory += 1
         return Card.idFactory
     }
     
-    func IncrementAndTrackFlipCount() -> Int {
-        Card.flipCount += 1
-        return Card.flipCount
-    }
-    
+    // Each time a card is initalized, we give it an unique id by calling the static factory again
     init() {
         self.id = Card.getUniqueId();
     }

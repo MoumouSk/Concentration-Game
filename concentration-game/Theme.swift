@@ -8,6 +8,9 @@
 
 import UIKit
 
+// This is a structure for the themes. Here we have all the necessaries info related to the themes.
+// This struct will be filled in an array of Themes. Has to be initialized with required values.
+
 struct Theme
 {
     var name: String
